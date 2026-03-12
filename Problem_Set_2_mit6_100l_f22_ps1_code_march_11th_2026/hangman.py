@@ -3,8 +3,8 @@
 # Collaborators:
 # Time spent: 4 Hours until today
 # Started Date: March 11th, 2026
-# Finish Date: ---
-# Actual Step: 2.4 out of 5
+# Finish Date: March 12th, 2026
+# Actual Step: 5 out of 5
 
 import random
 import string
@@ -133,20 +133,48 @@ def get_available_letters(letters_guessed):
 
 
 
-def separator():
+def separator() -> None:
     """"
     This function prints a separator for better interface on console
     """
-    print('-'*40)
+    print('--------------')
 
 
 #def get_user_guess(secret_word: string, with_help: bool, letters_guessed: list) -> tuple[string, bool]:
     
 
 def reveal_letter(secret_word: string, available_letters: string):
-    print(secret_word)
-    print(available_letters)
+    """
+        secret_word: the word the computer has chosen for the game
+        available_letters: the letters the user has guessed
 
+        this function will reveal a random letter of the secret word
+    """
+
+    while True:
+        new = random.randint(0, len(available_letters)-1)
+
+        if available_letters[new] in secret_word:
+            print(f'Letter revealed: {available_letters[new]}')
+            return available_letters[new]
+
+
+def return_unique_letters(secret_word: string) -> int:
+    """
+        secret_word: the word the computer has chosen for the game
+
+        this function will count the number of unique letters in the secret_word
+        and return an integer number for this count
+    """
+    passed_letters = []
+    total_unique_letters = 0
+
+    for letter in secret_word:
+        if letter not in passed_letters:
+            passed_letters.append(letter)
+            total_unique_letters += 1
+    
+    return total_unique_letters
 
 def hangman(secret_word, with_help):
     """
@@ -189,6 +217,8 @@ def hangman(secret_word, with_help):
     """
     letters_guessed = []
     guesses = 10
+    
+
     print('Welcome to Hangman!')
     print(f'I am thinking of a word that is {len(get_word_progress(secret_word, letters_guessed))} letters long')
 
@@ -206,6 +236,30 @@ def hangman(secret_word, with_help):
         while True:
             guess = input('Please guess a letter: ').lower().strip()
 
+            """
+                About this nested structure:
+                if guess: checks if the user entered a guess and not an empty string;
+
+                if guess != '!':
+                ----if the game is not being played in with_help mode , and the user enters '!':
+                    
+                    inside else clause the system will check:
+                ----if with_help: 
+                --------if guesses > 3:
+                ------------only if the game is being played on with_help mode and the user 
+                ------------has more than 3 lifes the help can be used
+                --------otherwise the help won't be allowed (because one letter reveal costs three lifes)
+                ----otherwise without_help mode the system won't allow '!' symbol, only letters
+                
+                if guess not in letters_guessed: checks if the user has already entered that
+                letter, not allowing the same letter again;
+
+                if guess.isalpha() and len(guess) == 1: checks if the user guess only contain
+                letters and verifyif the guess is only one letter long 
+                
+                if guess in secret_word: verify if the user guess is in the secret_word,
+                so it checks wether the guess is correct or wrong
+            """
             if guess:
                 if guess != '!':
                     if guess not in letters_guessed:
@@ -233,9 +287,12 @@ def hangman(secret_word, with_help):
                         break
                 else:
                     if with_help:
-                        print('Help wanted!')
                         if guesses > 3:
-                            reveal_letter(secret_word, get_available_letters(letters_guessed))
+                            help_letter = reveal_letter(secret_word, get_available_letters(letters_guessed))
+                            letters_guessed.append(help_letter)
+                            guesses -= 3
+                            print(get_word_progress(secret_word, letters_guessed))
+                            break
                         else:
                             print(f'Oops! Not enough guesses left: {get_word_progress(secret_word, letters_guessed)}')
                     else:
@@ -243,7 +300,16 @@ def hangman(secret_word, with_help):
             else:
                 print('You cannot send an empty guess! Try again.')
             
-        
+        if has_player_won(secret_word, letters_guessed):
+            total_score = (guesses + 4 * return_unique_letters(secret_word)) + (3 * len(secret_word))
+            separator()
+            print('Congratulations, you won!')
+            print(f'Your total score for this game is: {total_score}')
+            break
+        if guesses <= 0:
+            separator()
+            print(f'Sorry, you ran out of guesses. The word was {secret_word}.')
+            break
 
 
 
@@ -255,7 +321,7 @@ if __name__ == "__main__":
 
     secret_word = choose_word(wordlist)
     with_help = True
-    hangman('apple', with_help)
+    hangman(secret_word, with_help)
 
     # After you complete with_help functionality, change with_help to True
     # and try entering "!" as a guess!
