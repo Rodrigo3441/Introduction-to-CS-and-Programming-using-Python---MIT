@@ -1,4 +1,4 @@
-#  Introduction to Computer Sciente and Programming using Python
+#  Introduction to Computer Science and Programming using Python
 A course from MIT
 
 
