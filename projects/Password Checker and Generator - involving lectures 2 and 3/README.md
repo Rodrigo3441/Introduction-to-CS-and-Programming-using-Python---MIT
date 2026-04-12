@@ -1,17 +1,17 @@
-# 🔐 Password Strength Checker + Generator
+# Password Strength Checker + Generator
 
-## 📌 Overview
+## Overview
 
 This project is a simple Python application that allows users to:
 
-* ✅ Check the strength of a password
-* 🔑 Generate a strong random password
+* Check the strength of a password
+* Generate a strong random password
 
 It was developed as practice based on **Lectures 2 and 3** (Strings, Input/Output, Branching, and Iteration) from the MIT Python course.
 
 ---
 
-## 🧠 Concepts Practiced
+## Concepts Practiced
 
 This project demonstrates the use of:
 
@@ -25,7 +25,7 @@ This project demonstrates the use of:
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 project-folder/
@@ -38,9 +38,9 @@ project-folder/
 
 ---
 
-## ⚙️ Features
+## Features
 
-### 🔍 Password Strength Checker
+### Password Strength Checker
 
 * Analyzes:
 
@@ -57,7 +57,7 @@ project-folder/
 
 ---
 
-### 🔑 Password Generator
+### Password Generator
 
 * User defines desired length (minimum: 8)
 * Automatically ensures:
@@ -70,7 +70,7 @@ project-folder/
 
 ---
 
-### 🧭 Interactive Menu
+### Interactive Menu
 
 * Loop-based system that allows:
 
@@ -80,7 +80,7 @@ project-folder/
 
 ---
 
-## ▶️ How to Run
+## How to Run
 
 1. Make sure you have Python installed (Python 3.10+ recommended for `match-case`)
 2. Run the main file:
@@ -91,7 +91,7 @@ python main.py
 
 ---
 
-## 💡 Example Usage
+## Example Usage
 
 ```
 1 - Check password strength
@@ -103,7 +103,7 @@ Choose what you want to do:
 
 ---
 
-## 🚀 Possible Improvements
+## Possible Improvements
 
 * Save generated passwords to a file
 * Add user preferences (include/exclude symbols)
@@ -113,18 +113,18 @@ Choose what you want to do:
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Rodrigo de Souza Galvão**
 
 ---
 
-## 📅 Last Update
+## Last Update
 
 April 12, 2026
 
 ---
 
-## 📜 License
+## License
 
 This project is for educational purposes.
